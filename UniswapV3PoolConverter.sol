@@ -24,15 +24,15 @@ contract UniswapV3PoolConverter {
       int24 tickLower,
       int24 tickUpper,
       // liquidity of the position
-      int128 liquidityDelta,
-    ) public view returns (
+      int128 liquidityDelta
+    ) public pure returns (
             int256 amount0,
             int256 amount1
         )
     {
-        checkTicks(params.tickLower, params.tickUpper);
+        checkTicks(tickLower, tickUpper);
 
-        if (params.liquidityDelta != 0) {
+        if (liquidityDelta != 0) {
             if (tick < tickLower) {
                 // current tick is below the passed range; liquidity can only become in range by crossing from left to
                 // right, when we'll need _more_ token0 (it's becoming more valuable) so user must provide it
